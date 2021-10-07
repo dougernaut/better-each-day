@@ -19,7 +19,7 @@ if ($null -eq $startDate) {
 # Calculate the number of days since the first day
 $datesDifference = ($currentDay-(get-date $firstDay))
 $days = $datesDifference.Days
-$reps = $days * $increment
+$reps = [MATH]::floor($days * $increment)
 #print results to the screen
 write-host "Today is day $days of the current year."
 write-host "You should do $reps reps of $activity today!"
