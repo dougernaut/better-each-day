@@ -1,7 +1,7 @@
 ######################
 # Accept arguments
 ###################### 
-param ($startDate, $increment, $activity)
+param ($startDate, $increment=1, $activity="your activity")
 
 ######################
 #Setting the variables
@@ -9,14 +9,17 @@ param ($startDate, $increment, $activity)
 $currentDay = Get-Date
 #For now we are using 1 Jan of the current year as the start date.
 #TODO: Add ability for user input of start date
-$firstDay = "01/01/"+$currentDay.Year
-if ($activity -eq $null) {    
-    $activity = "your activity"
+if ($null -eq $startDate) {
+    $firstDay = "01/01/"+$currentDay.Year
+} else {
+    $firstDay = $startDate
 }
+
 
 # Calculate the number of days since the first day
 $datesDifference = ($currentDay-(get-date $firstDay))
 $days = $datesDifference.Days
+$reps = $days * $increment
 #print results to the screen
 write-host "Today is day $days of the current year."
-write-host "You should do $days reps of $activity today!"
+write-host "You should do $reps reps of $activity today!"
